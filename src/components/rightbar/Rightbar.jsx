@@ -68,18 +68,11 @@ export default function Rightbar({ profile }) {
         </>
     );
 
-    const RightbarContent = () => {
-        if (profile)
-            return <ProfileRightbar />;
-        else
-            return <HomeRightbar />;
-    }
-
     return (
         <div className="rightbar">
             <div className="rightbarWrapper">
-                <RightbarContent />
+                {profile ? <ProfileRightbar /> : <HomeRightbar />}
             </div>
         </div>
-    )
+    );
 }
