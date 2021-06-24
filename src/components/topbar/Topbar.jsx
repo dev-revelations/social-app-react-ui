@@ -3,6 +3,9 @@ import "./topbar.css";
 import { Search, Person, Chat, Notifications } from "@material-ui/icons"
 
 export default function Topbar() {
+
+    const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
     return (
         <div className="topbarContainer">
             <div className="topbarLeft">
@@ -33,7 +36,7 @@ export default function Topbar() {
                         <span className="topbarIconBadge">7</span>
                     </div>
                 </div>
-                <img src="/assets/person/4.jpeg" alt="Profile" className="topbarProfileImg" />
+                <img src={`${PF}person/4.jpeg`} alt="Profile" className="topbarProfileImg" />
             </div>
         </div>
     );
