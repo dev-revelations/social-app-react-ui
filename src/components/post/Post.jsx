@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./post.css";
 import { MoreVert } from "@material-ui/icons";
-import { Users } from '../../dummyData';
+import axios from "axios";
 
 export default function Post({ post }) {
-    const user = Users.find(u => u.id === post.userId);
-    const [like, setLike] = useState(post.like);
+    const [user, setUser] = useState({});
+    const [like, setLike] = useState(post.likes.length);
     const [isLiked, setIsLiked] = useState(false);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
@@ -14,12 +14,22 @@ export default function Post({ post }) {
         setIsLiked(!isLiked);
     };
 
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const res = await axios.get(`users/${post.userId}`);
+            setUser(res.data);
+        };
+
+        fetchUser();
+    }, []);
+
     return (
         <div className="post">
             <div className="postWrapper">
                 <div className="postTop">
                     <div className="postTopLeft">
-                        <img src={PF + user?.profilePicture} alt="Profile" className="postProfileImg" />
+                        <img src={user?.profilePicture ? PF + user?.profilePicture : PF + "person/noAvatar.png"} alt="Profile" className="postProfileImg" />
                         <span className="postUsername">{user?.username}</span>
                         <span className="postDate">{post.date}</span>
                     </div>
@@ -29,7 +39,7 @@ export default function Post({ post }) {
                 </div>
                 <div className="postCenter">
                     <span className="postText">{post?.desc}</span>
-                    <img className="postImg" src={PF + post.photo} alt="" />
+                    <img className="postImg" src={PF + post.img} alt="" />
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
