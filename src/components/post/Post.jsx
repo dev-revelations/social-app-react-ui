@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./post.css";
 import { MoreVert } from "@material-ui/icons";
 import axios from "axios";
+import { format } from "timeago.js";
 
 export default function Post({ post }) {
     const [user, setUser] = useState({});
@@ -31,7 +32,7 @@ export default function Post({ post }) {
                     <div className="postTopLeft">
                         <img src={user?.profilePicture ? PF + user?.profilePicture : PF + "person/noAvatar.png"} alt="Profile" className="postProfileImg" />
                         <span className="postUsername">{user?.username}</span>
-                        <span className="postDate">{post.date}</span>
+                        <span className="postDate">{format(post.createdAt)}</span>
                     </div>
                     <div className="postTopRight">
                         <MoreVert />
