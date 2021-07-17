@@ -51,7 +51,7 @@ export default function Register() {
                         <input placeholder="Password" onChange={checkIfPasswordMatch} required minLength="6" type="password" ref={password} type="password" className="loginInput" />
                         <input placeholder="Password Again" onChange={checkIfPasswordMatch} required type="password" ref={passwordAgain} type="password" className="loginInput" />
                         <button className="loginButton" type="submit">Sign Up</button>
-                        <button className="loginRegisterButton">Log into Account</button>
+                        <button className="loginRegisterButton" onClick={()=>history.push('/login')}>Log into Account</button>
                     </form>
                 </div>
             </div>
